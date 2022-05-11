@@ -18,3 +18,7 @@ ___
 ["1234", "1567", "-2", "computer science"] -> ["-2"]
 
 ["Russia", "Denmark", "Kazan"] ->[]
+___
+## Блок-схема
+
+![Flowchart](https://github.com/GasLowPoly/Test_Block1/blob/Block/Block.png?raw=true "Flowchart")
