@@ -5,8 +5,8 @@
 лучше обойтись исключительно массивами.
 */
 
-int length = 0;
-
+int count1 = 0;
+int count2 = 0;
 
 try
 {
@@ -14,17 +14,17 @@ try
 
 
     Console.WriteLine("How many words you want?");
-    length = Convert.ToInt32(Console.ReadLine());
-    string[] words = new string[length];
+    count1 = Convert.ToInt32(Console.ReadLine());
+    string[] words = new string[count1];
 
     SetItems(words);
 
-    Console.WriteLine("Your words:"); // печатаем собранный массив
+    Console.WriteLine("Your words:");
     PrintArray(words);
 
-    Console.WriteLine();
-    Console.WriteLine("Filtred words:"); // печатаем собранный массив
-    PrintArray(FilterAndGenNew(words));
+    Console.WriteLine(string.Empty);
+    Console.WriteLine("Filtred words:");
+    PrintArray(NewArray(words));
 }
 catch
 {
@@ -35,46 +35,24 @@ catch
 void SetItems(string[] arrayName)
 {
     int length = arrayName.Length;
-    if (length > 0)
-    {
-        for (int i = 0; i < length; i++)
-        {
-            Console.WriteLine($"Set word {i + 1}");
-            arrayName[i] = Console.ReadLine();
-        }
-    }
-    else
-    {
-        Console.WriteLine("Something wrong with your number. Restart and try again");
-    }
 
-}
-
-void PrintArray(string[] arrayName)
-{
-    length = arrayName.Length;
-    Console.Write("[ ");
     for (int i = 0; i < length; i++)
     {
-        Console.Write(arrayName[i] + " ");
+        Console.WriteLine($"Set word {i + 1}");
+        arrayName[i] = Console.ReadLine();
+        if (arrayName[i]==string.Empty) arrayName[i] = "Nothing";
+        if (arrayName[i].Length <= 3) count2++;
     }
-    Console.Write("]");
+
 }
-
-string[] FilterAndGenNew(string[] arrayName)
+string[] NewArray(string[] arrayName)
 {
-    int count = 0; //считаем нужные
-    for (int i = 0; i < arrayName.Length; i++)
+    int length = arrayName.Length;
+    string[] result = new string[count2];
+    int j = 0;
+
+    for (int i = 0; i < length; i++)
     {
-        if (arrayName[i].Length <= 3) count++;
-    }
-
-    string[] result = new string[count]; // создаем новый массив, зная количество новых элементов
-    int j = 0; // начальный индекс нового массива
-
-    for (int i = 0; i < arrayName.Length; i++) // перебираем старый массив и собираем новый из подходящих элементов
-    {
-
         if (arrayName[i].Length <= 3)
         {
             result[j] = arrayName[i];
@@ -82,5 +60,15 @@ string[] FilterAndGenNew(string[] arrayName)
         }
     }
     return result;
-
+}
+void PrintArray(string[] arrayName)
+{
+    int length = arrayName.Length;
+    Console.Write("[ ");
+    for (int i = 0; i < length; i++)
+    {
+        Console.Write(arrayName[i] + " ");
+    }
+    Console.Write("]");
+    Console.WriteLine(string.Empty);
 }
